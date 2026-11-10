@@ -5,7 +5,6 @@ import '../models/movie_model.dart';
 class MoviesApiService {
   static const String baseUrl = 'https://movies-api.accel.li/api/v2';
 
-  // قائمة الأفلام (للـ Home والـ Browse والـ Search)
   Future<List<MovieModel>> getMovies({
     String? genre,
     String? query,
@@ -35,7 +34,6 @@ class MoviesApiService {
     return List<MovieModel>.from(movies.map((m) => MovieModel.fromJson(m)));
   }
 
-  // تفاصيل فيلم (بالصور والـ cast)
   Future<MovieModel> getMovieDetails(int movieId) async {
     final uri = Uri.parse('$baseUrl/movie_details.json').replace(
       queryParameters: {
@@ -54,7 +52,6 @@ class MoviesApiService {
     return MovieModel.fromJson(data['movie']);
   }
 
-  // أفلام مشابهة (4 أفلام)
   Future<List<MovieModel>> getSuggestions(int movieId) async {
     final uri = Uri.parse('$baseUrl/movie_suggestions.json')
         .replace(queryParameters: {'movie_id': '$movieId'});

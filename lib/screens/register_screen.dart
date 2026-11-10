@@ -34,7 +34,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  // بترجع رسالة الخطأ لو فيه مشكلة، أو null لو كله تمام
   String? validateFields() {
     if (nameController.text.trim().isEmpty) return 'Please enter your name';
     if (!emailController.text.contains('@')) return 'Please enter a valid email';
@@ -159,7 +158,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  // صف الـ Avatars: المختار أكبر
   Widget buildAvatarPicker() {
     return SizedBox(
       height: 130,

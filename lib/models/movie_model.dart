@@ -63,9 +63,26 @@ class MovieModel {
       cast: castList,
     );
   }
+
+  factory MovieModel.fromSaved(Map<String, dynamic> data) {
+    return MovieModel(
+      id: data['id'] ?? 0,
+      title: data['title'] ?? '',
+      year: 0,
+      rating: (data['rating'] ?? 0).toDouble(),
+      runtime: 0,
+      likeCount: 0,
+      summary: '',
+      genres: [],
+      mediumCoverImage: data['image'] ?? '',
+      largeCoverImage: data['image'] ?? '',
+      backgroundImage: '',
+      screenshots: [],
+      cast: [],
+    );
+  }
 }
 
-// بتحوّل رابط الصورة لدومين الصور اللي شغال
 String fixImageUrl(String url) {
   return url.replaceFirst('://yts.gg/', '://img.yts.gg/');
 }

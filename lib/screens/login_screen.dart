@@ -52,6 +52,22 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Future<void> onGooglePressed() async {
+    setState(() => isLoading = true);
+    final error = await authService.loginWithGoogle();
+    if (!mounted) return;
+    setState(() => isLoading = false);
+
+    if (error != null) {
+      showMessage(error);
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainScreen()),
+      );
+    }
+  }
+
   void showMessage(String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
@@ -231,17 +247,27 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       height: 52,
       child: ElevatedButton.icon(
-        onPressed: () => showMessage('Google login coming soon'),
+        onPressed: isLoading ? null : onGooglePressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.yellow,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        icon: Image.asset('assets/Icons/google_icon.png', width: 24),
-        label: const Text(
-          'Login With Google',
-          style: TextStyle(
+        icon: isLoading
+            ? const SizedBox(
+          width: 24,
+          height: 24,
+          child: CircularProgressIndicator(
+            color: AppColors.background,
+            strokeWidth: 3,
+          ),
+        )
+            : Image.asset('assets/Icons/google_icon.png', width: 24),
+
+        label: Text(
+          isLoading ? 'Please wait...' : 'Login With Google',
+          style: const TextStyle(
             color: AppColors.background,
             fontSize: 18,
             fontWeight: FontWeight.w600,

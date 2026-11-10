@@ -15,7 +15,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
 
-  // بنعملهم مرة واحدة عشان الشاشات متتحمّلش من جديد كل ما نبدّل التاب
   late final List<Widget> screens = [
     HomeScreen(onSeeMorePressed: () => changeTab(2)),
     const SearchScreen(),

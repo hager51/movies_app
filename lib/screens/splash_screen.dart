@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import 'onboarding_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,9 +21,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void goToNextScreen() {
     Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
+
+      final user = FirebaseAuth.instance.currentUser;
+      final Widget nextScreen =
+      user != null ? const MainScreen() : const OnboardingScreen();
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+        MaterialPageRoute(builder: (context) => nextScreen),
       );
     });
   }

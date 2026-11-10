@@ -54,7 +54,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           child: Column(
             children: [
               const SizedBox(height: 30),
-              // حطي صورة الـ illustration هنا بعد ما تصدّريها من Figma
               Image.asset(
                 'assets/images/forget_password.png',
                 height: 280,
